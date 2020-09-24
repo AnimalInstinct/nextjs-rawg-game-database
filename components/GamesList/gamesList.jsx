@@ -1,3 +1,4 @@
+import GamesItem from './gamesListItem'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -7,13 +8,14 @@ const Wrapper = styled.div`
   color: ${(props) => props.theme.textColor};
 `
 
-const GamesItem = ({ game }) => {
+const GamesList = ({ games }) => {
   return (
     <Wrapper>
-      <div>{}</div>
-      <h1>{game.name}</h1>
+      {games.results
+        ? games.results.map((game) => <GamesItem key={game.id} game={game} />)
+        : 'LOADING...'}
     </Wrapper>
   )
 }
 
-export default GamesItem
+export default GamesList

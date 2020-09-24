@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { buildQuery } from '../../helpers/query'
 import { useRouter } from 'next/router'
 
+import * as api from '../../api/games'
+
 const Wrapper = styled.div`
   padding: 2em;
   border: 1px solid lightgray;
@@ -93,7 +95,11 @@ const GamesFilter = ({ platforms, query }) => {
             </option>
           ))}
         </select>
-        <select name='ordering' onChange={filterOrderingHandler}>
+        <select
+          name='ordering'
+          value={filter.ordering}
+          onChange={filterOrderingHandler}
+        >
           <option></option>
           {sortBy.map((param) => (
             <option key={param}>{param}</option>

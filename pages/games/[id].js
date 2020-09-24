@@ -1,44 +1,47 @@
 import Head from 'next/head'
-import * as api from '../api/games'
+import * as api from '../../api/games'
 import styled from 'styled-components'
+import Game from '../../components/Game/Game'
 
-const Container = styled.div`
+const Wrapper = styled.div`
   padding: 2em;
   border: 1px solid lightgray;
+  background-color: ${(props) => props.theme.backgroundColor};
+  color: ${(props) => props.theme.textColor};
 `
 
-export default function Post({ postData }) {
+export default function GameDetails({ game, screenshots }) {
   return (
-    <Layout>
-      <Container>
-        <Head>
-          <title>{postData.title}</title>
-        </Head>
-        <h1>{postData.title}</h1>
-        <hr />
-        <Date dateString={postData.date} />
-        <hr />
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-      </Container>
-    </Layout>
+    <Wrapper>
+      <Head>
+        <title>{game.name}</title>
+        <link rel='icon' href='/gamepad.ico' />
+      </Head>
+      <Game game={game} screenshots={screenshots} />
+    </Wrapper>
   )
 }
 
-export async function getStaticPaths() {
-  // Return a list of possible value for id
-  const paths = getAllPostIds()
+export async function getServerSideProps(context) {
+  const game = await api.fetchGame(context)
+  const screenshots = await api.fetchGameScreenshots(context)
   return {
-    paths,
-    fallback: false,
+    props: {
+      game,
+      screenshots,
+    },
   }
 }
 
-// export async function getStaticProps({ params }) {
-//   // Fetch necessary data for the blog post using params.id
-//   const postData = await getPostData(params.id)
+// export async function getStaticPaths() {
+//   // console.log(context.params)
+//   // Return a list of possible value for id
+//   const games = await api.fetchGames()
+//   const test = await api.getGamesPaths(games)
+//   console.log(test)
+//   const paths = ['1', '2', '3']
 //   return {
-//     props: {
-//       postData
-//     }
+//     paths,
+//     fallback: false,
 //   }
 // }
