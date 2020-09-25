@@ -31,9 +31,9 @@ const Header = styled.div`
 `
 
 export default function Home({ games, platforms, query }) {
-  const { count, next } = games
-  const { page, page_size: pageSize } = query
+  const { count } = games
   const router = useRouter()
+  const { page, pageSize } = query
 
   useEffect(() => {
     if (!(page || pageSize)) {
@@ -53,12 +53,7 @@ export default function Home({ games, platforms, query }) {
         </Header>
         <GamesFilter platforms={platforms} query={query} />
         <GamesList games={games} />
-        <Pagination
-          count={count}
-          pageSize={pageSize}
-          next={next}
-          current={page}
-        />
+        <Pagination count={count} query={query} />
       </main>
       <footer></footer>
     </Container>

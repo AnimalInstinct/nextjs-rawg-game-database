@@ -85,7 +85,7 @@ const SearchButton = styled.button`
 
 const GamesFilter = ({ platforms, query }) => {
   const router = useRouter()
-  const sortBy = [{name:"Rating Hight>Low",query:'rating'},{name:"Rating Low>Hight",query:'-rating'},{name:"Released New>Late",query:'released'},{name:"Released Late>New",query:'-released'}]
+  const sortBy = [{name:"Rating Low>Hight",query:'rating'},{name:"Rating Hight>Low",query:'-rating'},{name:"Released Late>New",query:'released'},{name:"Released New>Late",query:'-released'}]
 
   const initFilter = {
     page: null,
@@ -124,7 +124,6 @@ const GamesFilter = ({ platforms, query }) => {
 
   const submitHandler = (e) => {
     const query = buildQuery(filter)
-    console.log(query)
     router.push(query)
     e.preventDefault()
   }

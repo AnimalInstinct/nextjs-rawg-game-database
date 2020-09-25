@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 import {paginate} from '../../helpers/paginate'
 import { device } from '../../helpers/device'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { buildQuery } from '../../helpers/query'
+
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +21,7 @@ const Page = styled.div`
   color: white;
   cursor: pointer;
   border: 1px solid white;
-  margin 1px;
+  margin 1px; 
   @media ${device.mobileS} {
     padding: 5px;
   }
@@ -27,15 +30,23 @@ const Page = styled.div`
   }
 `
 
-const Pagination = ({ count, pageSize, next, current }) => {
+const Pagination = ({ count, query }) => {
+  const { page:current, page_size: pageSize } = query
   const totalPages = Math.round(count/pageSize)
   const pagination = paginate(totalPages, current, 5)
+  const router = useRouter()
+
+  console.log(query)
+
+  const pageChangeHandler = (page, query) => {
+    query.page = page
+    const newQuery = buildQuery(query)
+    router.push(newQuery)
+  }
 
   return (
     <Wrapper>
-      <Link href={`?page=${current-1}&page_size=${pageSize}`}><Page>Prev</Page></Link>
-      {pagination.map(page => <Link key={page} href={`?page=${page}&page_size=${pageSize}`}><Page>{page}</Page></Link>)}
-      <Link href={`?page=${current+1}&page_size=${pageSize}`}><Page>Next</Page></Link>
+      {pagination.map(page => <Page onClick={() => pageChangeHandler(page, query)}>{page}</Page>)}
     </Wrapper>
   )
 }
