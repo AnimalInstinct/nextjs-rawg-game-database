@@ -7,9 +7,63 @@ import * as api from '../../api/games'
 
 const Wrapper = styled.div`
   padding: 2em;
-  border: 1px solid lightgray;
-  background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.textColor};
+ 
+`
+
+const Form = styled.form`
+display: flex;
+flex-wrap: nowrap;
+width: 100%;
+`
+
+const Search = styled.input`
+  width: 150px;
+  height: 29px;
+  line-height: 30px;
+  font-size: 14px;
+  padding: 0 10px;
+  color: #151515;
+  border: 0;
+  &:focus{
+    outline: none;
+  }
+`
+
+const Platform = styled.select`
+  min-width: 100px;
+  height: 29px;
+  outline: 0;
+  border: none;
+  border-left: 1px solid #adadad;
+  cursor: pointer;
+`
+
+const Ordering = styled.select`
+  min-width: 150px;
+  height: 29px;
+  outline: 0;
+  border: none;
+  border-left: 1px solid #adadad;
+  cursor: pointer;
+  
+`
+
+const Direction = styled.button`
+  width: 150px;
+  height: 29px;
+  border: none;
+  cursor: pointer;
+  line-height: 20px;
+`
+
+const SearchButton = styled.button`
+  width: 150px;
+  background-color: #007701;
+  border: 1px solid white;
+  color: white;
+  height: 29px;
+  cursor: pointer;
+  padding: 0 20px;
 `
 
 const GamesFilter = ({ platforms, query }) => {
@@ -28,7 +82,6 @@ const GamesFilter = ({ platforms, query }) => {
 
   useEffect(() => {
     const newFilter = { ...filter }
-    console.log(query)
     Object.keys(query).forEach((key) => {
       newFilter[key] = query[key]
     })
@@ -76,38 +129,39 @@ const GamesFilter = ({ platforms, query }) => {
 
   return (
     <Wrapper>
-      <form onSubmit={submitHandler}>
-        <input
+      <Form onSubmit={submitHandler}>
+        <Search
           name='search'
           type='text'
+          placeholder="Search"
           value={filter.search}
           onChange={filterChangeHandler}
         />
-        <select
+        <Platform
           name='platform'
           value={filter.platforms}
           onChange={filterPlatformHandler}
         >
-          <option></option>
+          <option>Choose platform</option>
           {platforms.results.map((platform) => (
             <option value={platform.id} key={platform.id} id={platform.id}>
               {platform.name}
             </option>
           ))}
-        </select>
-        <select
+        </Platform>
+        <Ordering
           name='ordering'
           value={filter.ordering}
           onChange={filterOrderingHandler}
         >
-          <option></option>
+          <option>Ordering</option>
           {sortBy.map((param) => (
             <option key={param}>{param}</option>
           ))}
-        </select>
-        <span onClick={directionHandler}>{filter.asc ? 'ASC' : 'DESC'}</span>
-        <button type='submit'>Filter</button>
-      </form>
+        </Ordering>
+        <Direction onClick={directionHandler}>{filter.asc ? 'ASC' : 'DESC'}</Direction>
+        <SearchButton type='submit'>Filter</SearchButton>
+      </Form>
     </Wrapper>
   )
 }

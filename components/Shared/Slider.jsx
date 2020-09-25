@@ -109,7 +109,7 @@ export default function Slider({images}) {
       <Prev onClick={() => handlePrev()}>&#8592;</Prev>
       <Previews>
         {images && images.map((image, index) =>
-          <Preview index={index} src={image.image} onClick={() => setActiveSlide(index)}/>
+          <Preview key={image.id} index={index} src={image.image} onClick={() => setActiveSlide(index)}/>
         )}
       </Previews>
     </Slider>
