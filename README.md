@@ -15,5 +15,7 @@ Version 1.0.0 features:
 ```bash
 git clone git@github.com:AnimalInstinct/nextjs-rawg-game-database.git
 cd nextjs-rawg-game-database
-npm i && npm start
+npm install
+npm run build
+npm run start
 ```

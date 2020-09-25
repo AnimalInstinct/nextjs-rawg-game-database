@@ -38,14 +38,14 @@ export default function Home({ games, platforms, query }) {
         <link rel='icon' href='/gamepad.ico' />
       </Head>
       <main>
+        <GamesFilter platforms={platforms} query={query} />
+        <GamesList games={games} />
         <Pagination
           count={count}
           pageSize={pageSize}
           next={next}
           current={page}
         />
-        <GamesFilter platforms={platforms} query={query} />
-        <GamesList games={games} />
       </main>
       <footer></footer>
     </Container>

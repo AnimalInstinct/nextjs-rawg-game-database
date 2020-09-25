@@ -122,7 +122,6 @@ const GamesFilter = ({ platforms, query }) => {
 
   const submitHandler = (e) => {
     const query = buildQuery(filter)
-    console.log(query)
     router.push(query)
     e.preventDefault()
   }

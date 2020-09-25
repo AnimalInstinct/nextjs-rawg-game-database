@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { device } from '../../helpers/device'
+import Date from '../../helpers/date'
+
 
 const GamesItem = ({ game }) => {
-  console.log(game)
   const Wrapper = styled.div`
     border: 1px solid lightgray;
     cursor:pointer;
@@ -29,27 +30,35 @@ const GamesItem = ({ game }) => {
   `
 
   const Image = styled.div`
-    background-image: url(${game.background_image});
-    background-size: cover;
     width: 100%;
     height: 250px;
-  `
-
-  const Info = styled.div`
-
+    img {
+      width: 100%;
+    }
   `
 
   const Header = styled.div`
-    padding: 1em;
+    padding: 10px;
     font-size: 1em;
+  `
+
+  const Rating = styled.div`
+    font-size: 0.7em;
+    padding: 0 10px
+  `
+  
+  const ReleaseDate = styled.div`
+    font-size: 0.7em;
+    padding: 0 10px 10px;
   `
   return (
     <Link href={`/games/${game.id}`}>
       <Wrapper>
-        <Image></Image>
-        <Info>
+        <Image key={game.id}><img src={game.background_image} /></Image>
+          
           <Header>{game.name}</Header>
-        </Info>
+          <Rating>Rating: {game.rating}</Rating>
+          <ReleaseDate>Release date: <Date dateString={game.released} /></ReleaseDate>
       </Wrapper>
      </Link>
   )

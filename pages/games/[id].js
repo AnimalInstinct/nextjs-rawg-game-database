@@ -31,16 +31,3 @@ export async function getServerSideProps(context) {
     },
   }
 }
-
-// export async function getStaticPaths() {
-//   // console.log(context.params)
-//   // Return a list of possible value for id
-//   const games = await api.fetchGames()
-//   const test = await api.getGamesPaths(games)
-//   console.log(test)
-//   const paths = ['1', '2', '3']
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
