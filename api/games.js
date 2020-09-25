@@ -1,32 +1,31 @@
-import { buildQuery } from '../helpers/query'
+import { buildQuery } from "../helpers/query";
 
-const baseUrl = 'https://api.rawg.io/api'
+const baseUrl = "https://api.rawg.io/api";
 
 export const fetchGames = async (filter) => {
-  let query = ''
+  let query = "";
   if (filter) {
-    query = buildQuery(filter.query)
+    query = buildQuery(filter.query);
   }
-  const res = await fetch(`${baseUrl}/games${query}`)
-  const games = await res.json()
-  return games
-}
+  const res = await fetch(`${baseUrl}/games${query}`);
+  const games = await res.json();
+  return games;
+};
 
 export const fetchGame = async (filter) => {
-  const res = await fetch(`${baseUrl}/games/${filter.query.id}`)
-  const game = await res.json()
-  return game
-}
+  const res = await fetch(`${baseUrl}/games/${filter.query.id}`);
+  const game = await res.json();
+  return game;
+};
 
 export const fetchGameScreenshots = async (filter) => {
-  const res = await fetch(`${baseUrl}/games/${filter.query.id}/screenshots`)
-  const screenshots = await res.json()
-  return screenshots
-}
+  const res = await fetch(`${baseUrl}/games/${filter.query.id}/screenshots`);
+  const screenshots = await res.json();
+  return screenshots;
+};
 
 export const fetchPlatforms = async () => {
-  const res = await fetch(`${baseUrl}/platforms`)
-  const platforms = await res.json()
-  console.log(platforms)
-  return platforms
-}
+  const res = await fetch(`${baseUrl}/platforms`);
+  const platforms = await res.json();
+  return platforms;
+};

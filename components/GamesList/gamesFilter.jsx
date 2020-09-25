@@ -48,7 +48,7 @@ const Ordering = styled.select`
   
 `
 
-const Direction = styled.button`
+const Direction = styled.span`
   width: 150px;
   height: 29px;
   border: none;
@@ -68,14 +68,13 @@ const SearchButton = styled.button`
 
 const GamesFilter = ({ platforms, query }) => {
   const router = useRouter()
-  const sortBy = ['rating', 'released']
+  const sortBy = [{name:"Rating Hight>Low",query:'rating'},{name:"Rating Low>Hight",query:'-rating'},{name:"Released New>Late",query:'released'},{name:"Released Late>New",query:'-released'}]
 
   const initFilter = {
     page: null,
     search: '',
     platforms: '',
     ordering: '',
-    asc: true,
   }
 
   const [filter, setFilter] = useState(initFilter)
@@ -99,29 +98,16 @@ const GamesFilter = ({ platforms, query }) => {
     setFilter({ ...filter, platforms: selectedId })
   }
 
-  const directionHandler = (e) => {
-    const asc = !filter.asc
-    const direction = asc ? '' : '-'
-    while (filter.ordering.charAt(0) == '-')
-      filter.ordering = filter.ordering.substr(1)
-    const newOrdering = direction + filter.ordering
-    setFilter({
-      ...filter,
-      asc: !filter.asc,
-      ordering: newOrdering,
-    })
-  }
-
   const filterOrderingHandler = (e) => {
-    const direction = filter.asc ? '' : '-'
     setFilter({
       ...filter,
-      [e.target.name]: `${direction}${e.target.value}`,
+      [e.target.name]: e.target.value,
     })
   }
 
   const submitHandler = (e) => {
     const query = buildQuery(filter)
+    console.log(query)
     router.push(query)
     e.preventDefault()
   }
@@ -133,15 +119,13 @@ const GamesFilter = ({ platforms, query }) => {
           name='search'
           type='text'
           placeholder="Search"
-          value={filter.search}
           onChange={filterChangeHandler}
         />
         <Platform
           name='platform'
-          value={filter.platforms}
           onChange={filterPlatformHandler}
         >
-          <option>Choose platform</option>
+          <option value="">Choose platform</option>
           {platforms.results.map((platform) => (
             <option value={platform.id} key={platform.id} id={platform.id}>
               {platform.name}
@@ -150,15 +134,13 @@ const GamesFilter = ({ platforms, query }) => {
         </Platform>
         <Ordering
           name='ordering'
-          value={filter.ordering}
           onChange={filterOrderingHandler}
         >
-          <option>Ordering</option>
+          <option value="">Ordering</option>
           {sortBy.map((param) => (
-            <option key={param}>{param}</option>
+            <option key={param.name} value={param.query}>{param.name}</option>
           ))}
         </Ordering>
-        <Direction onClick={directionHandler}>{filter.asc ? 'ASC' : 'DESC'}</Direction>
         <SearchButton type='submit'>Filter</SearchButton>
       </Form>
     </Wrapper>

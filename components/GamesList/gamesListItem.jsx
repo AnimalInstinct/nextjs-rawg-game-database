@@ -58,7 +58,7 @@ const GamesItem = ({ game }) => {
           
           <Header>{game.name}</Header>
           <Rating>Rating: {game.rating}</Rating>
-          <ReleaseDate>Release date: <Date dateString={game.released} /></ReleaseDate>
+          <ReleaseDate>Release date: {game.released}</ReleaseDate>
       </Wrapper>
      </Link>
   )
