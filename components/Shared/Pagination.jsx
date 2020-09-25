@@ -1,21 +1,30 @@
 import styled from 'styled-components'
 import {paginate} from '../../helpers/paginate'
+import { device } from '../../helpers/device'
 import Link from 'next/link'
 
-
 const Wrapper = styled.div`
-  padding: 2em;
   display: flex;
-  width:100%;
-  
+  margin: auto;
+  padding: 20px 2em; 
+  @media ${device.mobileS} {
+    padding: 10px 0;
+    font-size: 0.7em;
+    margin: auto;
+  }
 `
 
 const Page = styled.div`
   color: white;
   cursor: pointer;
-  padding: 10px;
   border: 1px solid white;
   margin 1px;
+  @media ${device.mobileS} {
+    padding: 5px;
+  }
+  @media ${device.tablet} {
+    padding: 10px;
+  }
 `
 
 const Pagination = ({ count, pageSize, next, current }) => {

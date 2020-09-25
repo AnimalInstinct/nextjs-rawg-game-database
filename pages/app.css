@@ -1,6 +1,11 @@
+html {
+  width: 100%;
+}
+
 body {
   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   padding: 0;
   margin: 0;
   background-color: #151515;
+  width: 100%;
 }

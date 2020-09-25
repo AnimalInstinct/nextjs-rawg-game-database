@@ -20,6 +20,16 @@ const Container = styled.div`
   }
 `
 
+const Header = styled.div`
+  padding: 0 2rem;
+  font-size: 0.8rem;
+  color: ${(props) => props.theme.textColor};
+  @media ${device.mobileS} {
+    font-size: 0.5em;
+    padding: 0 10px;
+  }
+`
+
 export default function Home({ games, platforms, query }) {
   const { count, next } = games
   const { page, page_size: pageSize } = query
@@ -38,6 +48,9 @@ export default function Home({ games, platforms, query }) {
         <link rel='icon' href='/gamepad.ico' />
       </Head>
       <main>
+        <Header>
+          <h1>RAWG games database</h1>
+        </Header>
         <GamesFilter platforms={platforms} query={query} />
         <GamesList games={games} />
         <Pagination

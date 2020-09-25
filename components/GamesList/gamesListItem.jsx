@@ -1,55 +1,81 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { device } from '../../helpers/device'
-import Date from '../../helpers/date'
 
 
 const GamesItem = ({ game }) => {
   const Wrapper = styled.div`
-    border: 1px solid lightgray;
+    flex-grow:1;
+    border: 1px solid #2f2f2f;
     cursor:pointer;
-    height: 300px;
     margin: 5px;
-    display: flex;
-    flex-direction: column;
+    overflow:hidden;
     &:hover {
       bottom: 10px;
     };
     @media ${device.mobileS} {
-      flex-basis:90%;  
+      flex-basis:90%;
+      width: 90%;
     }
     @media ${device.tablet} {
-      flex-basis:40%;
+      flex-basis:90%;
     }
     @media ${device.laptop} {
       flex-basis:30%;
+    height: 280px;
+
     }
     @media ${device.desktop} {
       flex-basis:20%;
+    height: 280px;
+
     }
   `
 
   const Image = styled.div`
     width: 100%;
-    height: 250px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
     img {
-      width: 100%;
+      position: absolute;
+      right: 0; left: 0;
+      width 100%;
+      margin: auto
+    }
+    @media ${device.laptop} {
+      img {
+        position: absolute;
+        right: 0; left: 0;
+        width: auto;
+        height 100%;
+        margin: auto
+      }
+    }
+    @media ${device.desktop} {
+      img {
+        position: absolute;
+        right: 0; left: 0;
+        width: auto;
+        height 100%;
+        margin: auto
+      }
     }
   `
 
   const Header = styled.div`
-    padding: 10px;
+    padding: 5px;
     font-size: 1em;
   `
 
   const Rating = styled.div`
     font-size: 0.7em;
-    padding: 0 10px
+    padding: 0 5px
   `
   
   const ReleaseDate = styled.div`
     font-size: 0.7em;
-    padding: 0 10px 10px;
+    padding: 0 5px
   `
   return (
     <Link href={`/games/${game.id}`}>

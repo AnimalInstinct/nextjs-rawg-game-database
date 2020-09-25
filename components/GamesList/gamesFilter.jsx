@@ -2,22 +2,18 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { buildQuery } from '../../helpers/query'
 import { useRouter } from 'next/router'
-
-import * as api from '../../api/games'
+import { device } from '../../helpers/device'
 
 const Wrapper = styled.div`
-  padding: 2em;
- 
+  padding: 10px;
 `
 
 const Form = styled.form`
-display: flex;
-flex-wrap: nowrap;
-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 `
 
 const Search = styled.input`
-  width: 150px;
   height: 29px;
   line-height: 30px;
   font-size: 14px;
@@ -26,6 +22,12 @@ const Search = styled.input`
   border: 0;
   &:focus{
     outline: none;
+  }
+  @media ${device.mobileS} {
+    width: 100%;
+  }
+  @media ${device.tablet} {
+    width: 150px;
   }
 `
 
@@ -36,6 +38,14 @@ const Platform = styled.select`
   border: none;
   border-left: 1px solid #adadad;
   cursor: pointer;
+  @media ${device.mobileS} {
+    width: 100%;
+    margin-top: 10px;
+  }
+  @media ${device.tablet} {
+    width: 150px;
+    margin-top: 0px;
+  }
 `
 
 const Ordering = styled.select`
@@ -45,15 +55,14 @@ const Ordering = styled.select`
   border: none;
   border-left: 1px solid #adadad;
   cursor: pointer;
-  
-`
-
-const Direction = styled.span`
-  width: 150px;
-  height: 29px;
-  border: none;
-  cursor: pointer;
-  line-height: 20px;
+  @media ${device.mobileS} {
+    width: 100%;
+    margin-top: 10px;
+  }
+  @media ${device.tablet} {
+    width: 150px;
+    margin-top: 0px;
+  }
 `
 
 const SearchButton = styled.button`
@@ -64,6 +73,14 @@ const SearchButton = styled.button`
   height: 29px;
   cursor: pointer;
   padding: 0 20px;
+  @media ${device.mobileS} {
+    width: 100%;
+    margin: 10px auto; 
+  }
+  @media ${device.tablet} {
+    width: 150px;
+    margin: 0; 
+  }
 `
 
 const GamesFilter = ({ platforms, query }) => {
@@ -125,7 +142,7 @@ const GamesFilter = ({ platforms, query }) => {
           name='platform'
           onChange={filterPlatformHandler}
         >
-          <option value="">Choose platform</option>
+          <option value="">Platform</option>
           {platforms.results.map((platform) => (
             <option value={platform.id} key={platform.id} id={platform.id}>
               {platform.name}

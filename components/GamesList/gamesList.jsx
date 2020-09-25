@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import GamesItem from './GamesListItem'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  padding: 2em;
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.textColor};
   display: flex;
-  width:100%;
   flex-wrap: wrap;
 `
 

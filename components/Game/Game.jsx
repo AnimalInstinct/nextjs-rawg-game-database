@@ -16,11 +16,15 @@ const Wrapper = styled.div`
 `
 
 const SiteLink = styled.a`
-width: 100%;
+  width: 100%;
+  color: ${(props) => props.theme.textColor};
 `
 
 const Description = styled.p`
-width: 100%;
+  width: 100%;
+  color: ${(props) => props.theme.textColor};
+  font-size: 0.9em;
+  text-align: justify;
 `
 
 const BackButton = styled.div`
@@ -33,10 +37,15 @@ const Game = ({game, screenshots}) => {
   return (
     <Wrapper>
       <h1>{game.name}</h1>
-      {images && <Slider images={images} />}
-      {game.website && <SiteLink href={game.website}>Game Website link</SiteLink>}
-      {game.description && <Description dangerouslySetInnerHTML= {{__html: game.description}} />}
+      <hr/>
       <BackButton onClick={() => router.back()}>&#8592; Back to the games list</BackButton>
+      <hr/>
+      {images && <Slider images={images} />}
+      <hr/>
+      {game.description && <Description dangerouslySetInnerHTML= {{__html: game.description}} />}
+      <hr/>
+      {game.website && <SiteLink href={game.website}>Game Website link</SiteLink>}
+      <hr/>
     </Wrapper>
    );
 }
