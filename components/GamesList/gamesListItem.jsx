@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { device } from '../../helpers/device'
 
-
 const GamesItem = ({ game }) => {
   const Wrapper = styled.div`
     flex-grow:1;
@@ -81,10 +80,9 @@ const GamesItem = ({ game }) => {
     <Link href={`/games/${game.id}`}>
       <Wrapper>
         <Image key={game.id}><img src={game.background_image} /></Image>
-          
-          <Header>{game.name}</Header>
-          <Rating>Rating: {game.rating}</Rating>
-          <ReleaseDate>Release date: {game.released}</ReleaseDate>
+        <Header>{game.name}</Header>
+        <Rating>Rating: {game.rating}</Rating>
+        <ReleaseDate>Release date: {game.released}</ReleaseDate>
       </Wrapper>
      </Link>
   )

@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { device } from '../helpers/device'
 import * as api from '../api/games'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const Container = styled.div`
   width: 100%;
@@ -21,6 +22,7 @@ const Container = styled.div`
 `
 
 const Header = styled.div`
+  cursor: pointer;
   padding: 0 2rem;
   font-size: 0.8rem;
   color: ${(props) => props.theme.textColor};
@@ -49,7 +51,9 @@ export default function Home({ games, platforms, query }) {
       </Head>
       <main>
         <Header>
-          <h1>RAWG games database</h1>
+          <Link href={`/`}>
+            <h1>RAWG games database</h1>
+          </Link>
         </Header>
         <GamesFilter platforms={platforms} query={query} />
         <GamesList games={games} />

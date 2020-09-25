@@ -4,8 +4,6 @@ import { device } from '../../helpers/device'
 import { useRouter } from 'next/router'
 import { buildQuery } from '../../helpers/query'
 
-
-
 const Wrapper = styled.div`
   display: flex;
   margin: auto;
@@ -36,7 +34,6 @@ const Pagination = ({ count, query }) => {
   const pagination = paginate(totalPages, current, 5)
   const router = useRouter()
 
-  console.log(query)
 
   const pageChangeHandler = (page, query) => {
     query.page = page
